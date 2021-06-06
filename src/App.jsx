@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import { AddNewTask } from "./components/AddNewTask";
+import { DisplayUndones } from "./components/DisplayUndones";
+import { DisplayDones } from "./components/DisplayDones";
+
 import "./styles.css";
 
 export const App = () => {
@@ -34,61 +38,17 @@ export const App = () => {
 
   return (
     <>
-      <div className="input-section">
-        <h2>New task</h2>
-
-        <input
-          placeholder="Input your task here."
-          value={newTask}
-          onChange={onChangeNewTask}
-        />
-        <button onClick={onClickAddButton}>Add</button>
-      </div>
-      <div className="undone-section">
-        <h2>Undone</h2>
-        <ul>
-          {undones.map((todo, index) => {
-            return (
-              <li key={todo}>
-                <div className="list-item-wrapper">
-                  <div className="task-description-wrapper">
-                    <span>{todo}</span>
-                  </div>
-                  <div className="action-button-wrapper">
-                    <button onClick={() => onClickDoneButton(index)}>
-                      Done
-                    </button>
-                    <button onClick={() => onClickRemoveButton(index)}>
-                      Remove
-                    </button>
-                  </div>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-      <div className="done-section">
-        <h2>Done</h2>
-        <ul>
-          {dones.map((todo, index) => {
-            return (
-              <li key={todo}>
-                <div className="list-item-wrapper">
-                  <div className="task-description-wrapper">
-                    <span>{todo}</span>
-                  </div>
-                  <div className="action-button-wrapper">
-                    <button onClick={() => onClickRestoreButton(index)}>
-                      Restore
-                    </button>
-                  </div>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+      <AddNewTask
+        newTask={newTask}
+        onChange={onChangeNewTask}
+        onClick={onClickAddButton}
+      />
+      <DisplayUndones
+        tasks={undones}
+        onClickDoneButton={onClickDoneButton}
+        onClickRemoveButton={onClickRemoveButton}
+      />
+      <DisplayDones tasks={dones} onClickRestoreButton={onClickRestoreButton} />
     </>
   );
 };
