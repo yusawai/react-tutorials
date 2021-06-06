@@ -42,7 +42,14 @@ export const App = () => {
         newTask={newTask}
         onChange={onChangeNewTask}
         onClick={onClickAddButton}
+        disabled={undones.length >= 5}
       />
+      {undones.length >= 5 && (
+        <p>
+          You can have max 5 tasks at the same time. You must complete one first
+          if you want to add a new task.
+        </p>
+      )}
       <DisplayUndones
         tasks={undones}
         onClickDoneButton={onClickDoneButton}
